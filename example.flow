@@ -1,0 +1,21 @@
+import Flow;
+import Waves;
+
+module Test {
+    in1: Flow.Port.Note;
+    m1: Waves.Noise-X;
+    _: in1 -> m1;
+    C1: in1->m1;
+}
+
+impl Test {
+    function start(t: Test) {
+        buffer = t.in1;
+        t.in1 = _;
+        t.in1 = buffer;
+        return t;
+    }
+}
+
+Test t
+start(t);
