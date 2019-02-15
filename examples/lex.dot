@@ -1,0 +1,44 @@
+digraph {
+    begin -> i[label = "i"];
+    i -> i[label = "expect space"];
+    i -> import[label = "space and buffer is import"];
+    i -> impl[label = "space and buffer is impl"];
+    
+    i -> NoKeyword[label = "space and buffer is not impl or import"];
+    
+    begin -> m[label = "m"];
+    m -> m[label = "expect space"];
+    m -> module[label = "space and buffer is module"];
+    m -> NoKeyword[label = "space and buffer is not module"];
+    
+    begin -> f[label = "f"];
+    f -> f[label = "expect space"];
+    f -> function[label = "space and buffer is function"];
+    m -> NoKeyword[label = "space and buffer is not function"];
+    
+    begin -> StatmentEnd[label = ";"];
+    begin -> StatmentBegin[label = "{"];
+    StatmentBegin -> StatmentEnd [label = "}"];
+    
+    import -> import[label = "expect ;"];
+    import -> PackageName[label = ";"];
+    
+    module -> module[label = "expect {"];
+    module -> ModuleName[label = "{"];
+    
+    function -> function[label = "expect {"];
+    function -> FunctionName[label = "{"];
+    FunctionName -> FunctionName[label = "expect ("];
+    FunctionName -> ArgumentName[label = "("];
+    ArgumentName -> ArgumentName[label = "expect :"];
+    ArgumentName -> ArgumentType[label = ":"];
+    ArgumentType -> ArgumentType[label = "expect ) or ,"];
+    ArgumentType -> FunctionEnd[label = ") or ,"];
+    
+    
+    impl -> impl[label = "expect {"];
+    impl -> ImplName[label = "{"];
+    
+    
+    
+}
