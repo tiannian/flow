@@ -3,9 +3,9 @@ version ^0.1.0;
 import Flow;
 
 module IfStatement {
-    in: ->Flow.Port.Audio;
-    if: ->Flow.Port.Bool;
-    outTrue, outFalse: <-Flow.Port.Audio;
+    in: Flow.Port.Audio;
+    if: Flow.Port.Bool;
+    outTrue, outFalse: Flow.Port.Audio;
     wire: in -> outTrue;
 }
 
