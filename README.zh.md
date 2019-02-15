@@ -116,6 +116,36 @@ module Test {
 
 ## 参考
 
+### FlowScript API
+
+#### Package Flow
+
+Package Flow是FlowScript提供的核心API，这些API包括端口与一些默认的模块。
+
+- Flow.Port 包含所有默认类型。
+- Flow.Core 包含默认的模块。
+
+##### Flow.Port
+
+Flow.Port包含如下的hook:
+
+- onChange - 当值发生变化时，调用此hook。
+- onData - 当有新值产生时，调用此hook。
+
+##### Flow.Port.Bool
+
+继承自Flow.Port，可以取值True或False。
+
+Bool中包含如下hook：
+
+- onTrue - 当值为True时，调用此hook。
+- onFalse - 当值为False时，调用此hook。
+
+
+
+
+### C API
+
 ## 许可证
 
 本项目在LGPL-3.0下发布。
