@@ -1,5 +1,5 @@
 # Flow
-> script to process flow data(include audio, video, autometa, MIDI, or some others).
+> script to process flow data(include audio, video, autometa, Midi, or some others).
 
 [中文文档](README.zh.md)
 

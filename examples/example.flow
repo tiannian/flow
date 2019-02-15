@@ -8,7 +8,7 @@ module Test {
     C1: in1->m1;
 }
 
-impl Test {
+hook Test {
     function start(t: Test) {
         buffer = t.in1;
         t.in1 = _;
@@ -17,5 +17,7 @@ impl Test {
     }
 }
 
-Test t
-start(t);
+script Main {
+    Test t
+    start(t);
+}

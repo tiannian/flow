@@ -1,11 +1,63 @@
 # Flow
-> 一种脚本语言，用于处理流式数据（包括音频，视频，自动控制信息，MIDI和一些其它的流式数据）。
+> 一种脚本语言，用于处理流式数据（包括音频，视频，自动控制信息，Midi和一些其它的流式数据）。
 
 [English Document](README.md)
 
 现有的音视频处理工具（包括DAW，编辑器，效果器等）依旧采用的传统的算法来进行处理与分析数据。而随着大数据与AI数据的发展，我们已经拥有了更加好用的方式来处理这些数据数据来取得更好的效果，但现有工具的设计难以将其与AI新的算法与机制结合。Flow的目标就是创建一种新的用于处理音视频，自动控制，Midi序列等流式数据的工具，同时也能够对接传统的插件机制（VST，OpenFX等）与现有的大数据与AI处理机制（Tensorflow，Coffee）等。
 
 ## 设计原理
+
+现有的音频，视频，自动控制信号，Midi等本质上属于一种流式数据。在Flow的设计中，数据就像是水流一样沿着Wire移动，不断的经过一个又一个模块。每经过一个模块数据都有可能被经过处理计算等。Flow采用FlowScript来表示这些模块，以及这些模块间的连接关系。
+
+### 模块
+
+模块是构成Flow的最基础单位，模块用于处理流式数据。每一个模块可能由很多子模块构成，或者对应于外部系统（例如传统的效果插件，机器学习框架等）。
+
+一个模块由两部分组成，分别为Variable与Wire。Variable可以是输入输出接口，模块，而Wire则是连接Variable里的端口。Wire只能在Variable的输入输出之间进行连接。
+
+### 钩子
+
+### 脚本
+
+### FlowScript
+
+FlowScript是以`flow`为后缀的脚本语言，每一个FlowScript分为四部分。
+
+#### 导入语句
+
+导入语句负责向当前FlowScript中导入资源，这些资源包括模块，钩子，脚本等内容。
+
+```
+import <package> [as <alias>];
+```
+
+其中import是必须的的关键字，后面跟上包名。也可以使用as字句来对这个包其别名。
+
+例如：
+
+```
+import Flow; //import package named flow.
+import Flow.Port as Port //import Port under Flow and let its alias is Port
+```
+
+#### 模块声明
+
+模块声明记录了如何构造一个模块，以及这个模块中各个子模块之间的Wires连接关系。
+
+```
+module <name> {
+    <variable_name>: <type>; //Variable declare
+    <wire_name>: <variable_name_1> -> <variable_name_2> //Wire declare
+}
+```
+
+
+
+#### 钩子声明
+
+
+
+
 
 ## 使用方式
 
