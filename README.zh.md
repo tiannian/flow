@@ -35,7 +35,30 @@ Wire只能在Variable的输入输出接口之间进行连接。其中数据只�
 
 ### FlowScript
 
-FlowScript是以`flow`为后缀的脚本语言，每一个FlowScript分为四部分。
+FlowScript是以`flow`为后缀的脚本语言。
+
+#### 注释
+
+FlowScript使用`//`标记单行注释
+
+```
+// This is a comment.
+```
+
+#### 版本需求声明
+
+版本需求声明表达了此脚本执行所需要的Flow版本。
+
+```
+version <require>;
+```
+
+其中version是关键字，后跟版本号声明。以分号结束。例如：
+
+```
+version ^0.1.0; //Flow version must greater than 0.1.0
+version 0.1.0; //Flow version must equal 0.1.0
+```
 
 #### 导入语句
 
@@ -51,7 +74,7 @@ import <package> [as <alias>];
 
 ```
 import Flow; //import package named flow.
-import Flow.Port as Port //import Port under Flow and let its alias is Port
+import Flow.Port as Port //import Port under Flow and alias it Port.
 ```
 
 #### 模块声明
@@ -60,8 +83,8 @@ import Flow.Port as Port //import Port under Flow and let its alias is Port
 
 ```
 module <name> {
-    <variable_name>: <type>; //Variable declare
-    <wire_name>: <variable_name_1> -> <variable_name_2> //Wire declare
+    <variable_name>: <type>; //Variable declare.
+    <wire_name>: <variable_name_1> -> <variable_name_2> //Wire declare.
 }
 ```
 
