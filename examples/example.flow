@@ -1,23 +1,38 @@
 import Flow;
-import Waves;
+import VSTLoader;
 
-module Test {
-    in1: Flow.Port.Note;
-    m1: Waves.Noise-X;
-    _: in1 -> m1;
-    C1: in1->m1;
+module VSTest {
+    mute, bypass: Flow.Port.Bool;
+    in_left, in_right, out_left, out_right: Flow.Port.Audio;
+    vst: VSTLoader.load("test");
+    wire_left: in_left -> out_left;
+    wire_right: in_right -> out_right;
+    blackdoor: Flow.Blackdoor;
 }
 
-hook Test {
-    function start(t: Test) {
-        buffer = t.in1;
-        t.in1 = _;
-        t.in1 = buffer;
-        return t;
+hook VSTestMute for Test.mute {
+    valueChange.toTrue = {
+        wire_left.out = blackdoor;
+        wire_right.out = blackdoor;
+    }
+    valueChange.toFalse = Direct;
+}
+
+hook VSTestBypass for Test.bypass {
+    valueChange.toTrue = Direct;
+    valueChange.toFalse = script {
+        super.in_left.onData = super.vst.inputLeftData;
+        super.in_right.onData = super.vst.inputRightData;
+        super.out_left.onData = super.vst.outputLeftData;
+        super.out_right.onData = super.vst.outputRightData;
     }
 }
 
+script Direct {
+    wire_left.out = out_left;
+    wire_right.out = out_right;
+}
+
 script Main {
-    Test t
-    start(t);
+
 }
