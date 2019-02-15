@@ -13,4 +13,4 @@ Today's audio and video processing tools (including DAW, editors, effects, etc.)
 
 ## License
 
-This project release under GPLv3.
+This project release under LGPL-3.0
