@@ -88,13 +88,29 @@ module <name> {
 }
 ```
 
+其中module为关键字，后跟模块名。模块声明内容写在花括号中。
 
+模块声明中每一行则是一个声明语句。每一个声明语句由`:`分割，分号前是Variables或Wires名称，分号后是类型。名称可以使用任意UTF-8字符，但不能以数字开头，其中ASCII码范围内的符号只能存在_。
+
+若类型是一个单独的类型，则声明的是Variable。可以利用逗号分割多个变量名，实现同时声明多个变量。
+
+若类型是一个使用`->`连接的两个变量，则声明的是一个Wire，两个变量必须类型相同。声明的Wire同时只能声明一个，如果不需要为此Wire起名，则可以使用`_`代替名称。
+
+例如：
+
+```
+module Test {
+    blockdoor: Flow.Blockdoor; // Declare a variable called blackdoor, type is Flow.Blockdoor.
+    bypass,mute: Flow.Port.Bool; // Declare a variable called mute, type is Flow.Port.Bool.
+    in: Flow.Port.Audio;
+    no_meaning: bypass -> mute; // Declare a wire called no_meaning.
+    _: in -> blockdoor.in; // Declare a wire without name.
+}
+```
 
 #### 钩子声明
 
-
-
-
+#### 脚本声明
 
 ## 使用方式
 
