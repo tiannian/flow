@@ -11,20 +11,28 @@ digraph {
     m -> module[label = "space and buffer is module"];
     m -> NoKeyword[label = "space and buffer is not module"];
     
-    begin -> f[label = "f"];
-    f -> f[label = "expect space"];
-    f -> function[label = "space and buffer is function"];
-    m -> NoKeyword[label = "space and buffer is not function"];
-    
-    begin -> StatmentEnd[label = ";"];
-    begin -> StatmentBegin[label = "{"];
-    StatmentBegin -> StatmentEnd [label = "}"];
-    
     import -> import[label = "expect ;"];
     import -> PackageName[label = ";"];
     
     module -> module[label = "expect {"];
     module -> ModuleName[label = "{"];
+    
+    ModuleName -> NoNameVariable[label = "_"];
+    ModuleName -> VariableName[label = "expect _"];
+    VariableName -> VariableName[label = "expect : or }"];
+    VariableName -> VariableType[label = ":"];
+    NoNameVariable -> VariableType[label = ":"];
+    VariableType -> VariableType[label = "expect ;"];
+    VariableType -> VariableName[label = ";"];
+    VariableName -> ModuleEnd[label = "}"];
+    
+    impl -> impl[label = "expect {"];
+    impl -> ImplName[label = "{"];
+    ImplName -> f[label = "f"];
+    
+    f -> f[label = "expect space"];
+    f -> function[label = "space and buffer is function"];
+    f -> Error[label = "space and buffer is not function"];
     
     function -> function[label = "expect {"];
     function -> FunctionName[label = "{"];
@@ -33,11 +41,12 @@ digraph {
     ArgumentName -> ArgumentName[label = "expect :"];
     ArgumentName -> ArgumentType[label = ":"];
     ArgumentType -> ArgumentType[label = "expect ) or ,"];
-    ArgumentType -> FunctionEnd[label = ") or ,"];
+    ArgumentType -> ArgumentName[label = ","]
+    ArgumentType -> FunctionBody[label = ")"];
     
-    
-    impl -> impl[label = "expect {"];
-    impl -> ImplName[label = "{"];
+    begin -> StatmentEnd[label = ";"];
+    begin -> StatmentBegin[label = "{"];
+    StatmentBegin -> StatmentEnd [label = "}"];
     
     
     
